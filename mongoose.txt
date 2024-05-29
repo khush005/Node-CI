@@ -1,0 +1,32 @@
+const query = Person
+  .find({ occupation: /host/ })
+  .where('name.last').equals('Ghost')
+  .where('age').gt(17).lt(66)
+  .where('likes').in(['vaporizing', 'talking'])
+  .limit(10)
+  .sort('-occupation')
+  .select('name occupation');
+
+  // CHECK TO SEE IF THIS QUERY HAS ALREADY BEEN FETCHED IN REDIS 
+
+  query.exec = function () {
+    // to check to see if this query has already been executed & if it has written a result right away 
+    const result = client.get('query key');
+    if (result) {
+      return result;
+    }
+
+    // otherwise issue the query as normal 
+    const result = runTheOriginalExecFunction();
+
+    // then save that values in redis
+    client.set('query key', result);
+
+    return result;
+  }
+
+  query.exec((err, result) => console.log(result));
+
+  query.then(result => console.log(result));
+
+  const result = await query;

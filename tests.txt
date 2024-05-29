@@ -1,0 +1,3 @@
+A factory is a function that creates in return some common resource that we might want to use throughout our test suite.
+
+

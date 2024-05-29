@@ -1,0 +1,74 @@
+Open Ubuntu:
+sudo service redis-server start
+redis-cli 
+
+then vscode
+npm start
+
+
+
+
+
+
+const redis = require('redis')
+undefined
+> const redisUrl = 'redis://127.0.0.1:6379'
+undefined
+> const client = redis.createClient(redisUrl)
+undefined
+> client
+client('hi', 'there')
+Uncaught TypeError: client is not a function
+> client.set('hi', 'there')
+true
+> client.get('hi', (err, value) => console.log(value))
+true
+> there
+> client.get('there', console.log)
+true
+> null null
+> client.get('hi', console.log)
+true
+> null there
+> client.hset('german', 'red', 'rot')
+true
+> client.hget('german', 'red', console.log)
+true
+> null rot
+> client.hset('german', 'blue', 'blau')
+true
+> client.hget('german', 'blue')
+true
+> client.hget('german', 'blue', console.log)
+true
+> null blau
+> client.set('colors', {red: 'rojo'})
+true
+> node_redis: Deprecated: The SET command contains a argument of type Object.
+This is converted to "[object Object]" by using .toString() now and will return an error from v.3.0 on.
+Please handle this in your code to make sure everything works as you intended it to.
+
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+> client.get('colors', console.log)
+true
+> null [object Object]
+clienent.set('colors', JSON.stringify({red: 'rojo'}))
+true
+> client.get('colors', console.log)
+true
+> null {"red":"rojo"}
+clienent.get('colors', (err, val) => console.log(JSON.parse(val)))
+true
+> { red: 'rojo' }
+> CLIENT.FLUSHALL()
+Uncaught ReferenceError: CLIENT is not defined
+> client.flushall()
+true
+
+
+EXPIRATION
+> client.set('color', 'red', 'EX', 5)
+true
+> client.get('color', console.log)
+true
+> null null

@@ -1,0 +1,3 @@
+Proxies allow us to manage access to some target object or multiple target objects.
+
+Proxy is new constructor function. It is a global function.
